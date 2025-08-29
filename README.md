@@ -1,19 +1,26 @@
-# Проектирование GraphQL API
+# GraphQL: From Basics to Architecture
 
-Живые примеры для серии статей о GraphQL.
+Live examples and schemas for GraphQL article series.
 
-## Статьи
-1. [Введение в GraphQL](https://systems.education/graphql-intro)
-2. [GraphQL схемы и типы](https://systems.education/graphql-schema)  
-3. [Архитектура GraphQL приложений](https://systems.education/grapfql-arch)
+## Articles
+1. [Introduction to GraphQL](https://systems.education/graphql-intro) (Russian)
+2. [GraphQL Schemas and Types](https://systems.education/graphql-schema) (Russian)
+3. [GraphQL Architecture](https://systems.education/grapfql-arch) (Russian)
 
-## Живые примеры на CodeSandbox
-*Примеры будут добавлены по мере создания*
+## 🚀 Live Examples
+*CodeSandbox examples will be added soon*
 
-- [ ] Базовый GraphQL сервер
-- [ ] Схемы и типы из статей
-- [ ] REST vs GraphQL сравнение
-- [ ] Архитектурные паттерны
+- [ ] Basic GraphQL server
+- [ ] REST vs GraphQL comparison  
+- [ ] Order management schema from articles
+- [ ] Complex types (Enum, Interface, Union)
+- [ ] Mutations and fragments
 
-## Как использовать
-Кликай на ссылки CodeSandbox и экспериментируй с примерами прямо в браузере!
+## 📋 Schema & Query Files
+
+Ready to copy schemas and queries from articles:
+- `schemas/` - GraphQL schemas from articles
+- `queries/` - Example queries and mutations
+
+## How to use
+Click on CodeSandbox links (when added) and experiment with examples directly in your browser!
