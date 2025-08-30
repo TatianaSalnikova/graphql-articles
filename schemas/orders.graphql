@@ -1,0 +1,144 @@
+# Basic types from the articles
+scalar Date
+
+enum OrderStatus {
+  NEW
+  PROCESSING
+  COMPLETED
+  CANCELLED
+}
+
+# Main types
+type Client {
+  id: ID!
+  name: String!
+  email: String!
+  phone: String!
+  address: String
+  orders(
+    status: OrderStatus,
+    sortBy: OrderSortField,
+    sortDirection: SortOrder
+  ): [Order!]!
+}
+
+type Product {
+  id: ID!
+  name: String!
+  description: String
+  price: String!
+  category: ID!
+}
+
+# Interface for products
+interface ProductInterface {
+  id: ID!
+  name: String!
+  description: String
+  price: String!
+  category: ID!
+}
+
+type FoodProduct implements ProductInterface {
+  id: ID!
+  name: String!
+  description: String
+  price: String!
+  category: ID!
+  expirationDate: String!
+}
+
+type NonFoodProduct implements ProductInterface {
+  id: ID!
+  name: String!
+  description: String
+  price: String!
+  category: ID!
+  warrantyPeriod: String!
+}
+
+type OrderItem {
+  id: ID!
+  product: Product!
+  quantity: Int!
+  price: String!
+  subtotal: String!
+}
+
+type Order {
+  id: ID!
+  date: Date!
+  status: OrderStatus!
+  items: [OrderItem!]!
+  client: Client!
+  totalAmount: String!
+}
+
+# Enums for sorting
+enum OrderSortField {
+  DATE
+}
+
+enum SortOrder {
+  ASC
+  DESC
+}
+
+# Input types
+input CreateOrderInput {
+  clientId: ID!
+  items: [OrderItemInput!]!
+  comment: String
+}
+
+input OrderItemInput {
+  productId: ID!
+  quantity: Int!
+}
+
+# Connection types for pagination
+type OrderConnection {
+  edges: [OrderEdge]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type OrderEdge {
+  node: Order
+  cursor: String!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+# Root types
+type Query {
+  client(id: ID!): Client
+  order(id: ID!): Order!
+  orders(
+    id: ID
+    orderStatus: OrderStatus
+    itemNames: [String!]
+    first: Int
+    after: String
+  ): OrderConnection!
+}
+
+type Mutation {
+  createOrder(input: CreateOrderInput!): Order!
+}
+
+type Subscription {
+  orderStatusChanged(orderId: ID!): OrderStatusUpdate!
+}
+
+type OrderStatusUpdate {
+  orderId: ID!
+  oldStatus: OrderStatus!
+  newStatus: OrderStatus!
+  updatedAt: String!
+}
