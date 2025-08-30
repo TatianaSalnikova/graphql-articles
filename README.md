@@ -9,7 +9,7 @@ Live examples and schemas for GraphQL article series.
 
 ## 🚀 Live Examples
 
-- [Basic GraphQL server with examples from articles] (https://c2x5lh-3000.csb.app/)
+- [Basic GraphQL server with examples from articles](https://c2x5lh-3000.csb.app/)
 
 
 ## 📋 Schema & Query Files
