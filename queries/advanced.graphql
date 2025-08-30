@@ -1,0 +1,110 @@
+# Advanced queries and mutations from articles
+
+# Mutation to create order
+mutation CreateOrder($input: CreateOrderInput!) {
+  createOrder(input: $input) {
+    id
+    date
+    status
+    client {
+      name
+      phone
+    }
+    items {
+      product {
+        name
+        price
+      }
+      quantity
+      subtotal
+    }
+    totalAmount
+  }
+}
+
+# Variables examples for mutations
+# {
+#   "input": {
+#     "clientId": "CLT-123",
+#     "items": [
+#       {
+#         "productId": "PROD-1",
+#         "quantity": 2
+#       },
+#       {
+#         "productId": "PROD-2", 
+#         "quantity": 1
+#       }
+#     ],
+#     "comment": "Delivery before 18:00"
+#   }
+# }
+
+# Query with fragments (from articles)
+fragment ClientInfo on Client {
+  id
+  name
+  email
+  phone
+  address
+}
+
+fragment OrderSummary on Order {
+  id
+  date
+  status
+  totalAmount
+}
+
+fragment OrderItemDetails on OrderItem {
+  id
+  quantity
+  price
+  subtotal
+  product {
+    id
+    name
+    price
+    description
+  }
+}
+
+# Using fragments in query
+query GetOrderData($orderId: ID!) {
+  order(id: $orderId) {
+    ...OrderSummary
+    client {
+      ...ClientInfo
+    }
+    items {
+      ...OrderItemDetails
+    }
+  }
+  
+  recentOrders: orders(limit: 5) {
+    ...OrderSummary
+    client {
+      name # Only name for list
+    }
+  }
+}
+
+# Conditional query with directives
+query GetClient($withAddress: Boolean!) {
+  client(id: "CLT-123") {
+    name
+    email
+    address @include(if: $withAddress)
+  }
+}
+
+# Subscription example
+subscription OrderUpdates($orderId: ID!) {
+  orderStatusChanged(orderId: $orderId) {
+    orderId
+    oldStatus
+    newStatus
+    updatedAt
+  }
+}
+

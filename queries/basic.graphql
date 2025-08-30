@@ -1,0 +1,80 @@
+# Basic queries from the articles
+
+# Simple order query
+query GetOrder($orderId: ID!) {
+  order(id: $orderId) {
+    id
+    date
+    status
+    totalAmount
+    client {
+      name
+      email
+    }
+    items {
+      quantity
+      price
+      product {
+        name
+      }
+    }
+  }
+}
+
+# Query with interface fragments
+query GetProducts {
+  products(first: 10) {
+    edges {
+      node {
+        id
+        name
+        price
+        description
+        # Conditional fragments for different product types
+        ... on FoodProduct {
+          expirationDate
+        }
+        ... on NonFoodProduct {
+          warrantyPeriod
+        }
+      }
+    }
+  }
+}
+
+# Client with nested orders
+query GetClientWithOrders($clientId: ID!) {
+  client(id: $clientId) {
+    id
+    name
+    email
+    phone
+    orders(status: NEW, sortBy: DATE, sortDirection: DESC) {
+      id
+      date
+      status
+      totalAmount
+    }
+  }
+}
+
+# Multiple queries in one request (from articles)
+query GetDashboardData {
+  newOrders: orders(status: NEW, limit: 5) {
+    id
+    date
+    totalAmount
+    client {
+      name
+    }
+  }
+  
+  completedOrders: orders(status: COMPLETED, limit: 5) {
+    id
+    date
+    totalAmount
+    client {
+      name
+    }
+  }
+}
