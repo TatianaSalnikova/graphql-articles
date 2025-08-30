@@ -8,13 +8,9 @@ Live examples and schemas for GraphQL article series.
 3. [GraphQL Architecture](https://systems.education/grapfql-arch) (Russian)
 
 ## 🚀 Live Examples
-*CodeSandbox examples will be added soon*
 
-- [ ] Basic GraphQL server
-- [ ] REST vs GraphQL comparison  
-- [ ] Order management schema from articles
-- [ ] Complex types (Enum, Interface, Union)
-- [ ] Mutations and fragments
+- [Basic GraphQL server with examples from articles] (https://c2x5lh-3000.csb.app/)
+
 
 ## 📋 Schema & Query Files
 
@@ -23,4 +19,4 @@ Ready to copy schemas and queries from articles:
 - `queries/` - Example queries and mutations
 
 ## How to use
-Click on CodeSandbox links (when added) and experiment with examples directly in your browser!
+Click on CodeSandbox links and experiment with examples directly in your browser!
