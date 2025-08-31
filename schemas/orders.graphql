@@ -74,16 +74,6 @@ type Order {
   totalAmount: String!
 }
 
-# Enums for sorting
-enum OrderSortField {
-  DATE
-}
-
-enum SortOrder {
-  ASC
-  DESC
-}
-
 # Input types
 input CreateOrderInput {
   clientId: ID!
@@ -118,11 +108,11 @@ type PageInfo {
 # Root types
 type Query {
   client(id: ID!): Client
+  products: [ProductInterface!]!
   order(id: ID!): Order!
   orders(
-    id: ID
     orderStatus: OrderStatus
-    itemNames: [String!]
+    limit: Int
     first: Int
     after: String
   ): OrderConnection!
@@ -130,15 +120,4 @@ type Query {
 
 type Mutation {
   createOrder(input: CreateOrderInput!): Order!
-}
-
-type Subscription {
-  orderStatusChanged(orderId: ID!): OrderStatusUpdate!
-}
-
-type OrderStatusUpdate {
-  orderId: ID!
-  oldStatus: OrderStatus!
-  newStatus: OrderStatus!
-  updatedAt: String!
 }

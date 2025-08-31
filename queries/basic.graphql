@@ -23,9 +23,7 @@ query GetOrder($orderId: ID!) {
 
 # Query with interface fragments
 query GetProducts {
-  products(first: 10) {
-    edges {
-      node {
+  products {
         id
         name
         price
@@ -39,8 +37,6 @@ query GetProducts {
         }
       }
     }
-  }
-}
 
 # Client with nested orders
 query GetClientWithOrders($clientId: ID!) {
@@ -49,7 +45,7 @@ query GetClientWithOrders($clientId: ID!) {
     name
     email
     phone
-    orders(status: NEW, sortBy: DATE, sortDirection: DESC) {
+    orders(status: NEW) {
       id
       date
       status
@@ -60,21 +56,41 @@ query GetClientWithOrders($clientId: ID!) {
 
 # Multiple queries in one request (from articles)
 query GetDashboardData {
-  newOrders: orders(status: NEW, limit: 5) {
-    id
-    date
-    totalAmount
-    client {
-      name
+  newOrders: orders(status: NEW, first: 5) {
+    totalCount
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    edges {
+      cursor
+      node {
+        id
+        date
+        totalAmount
+        client {
+          name
+        }
+      }
     }
   }
   
-  completedOrders: orders(status: COMPLETED, limit: 5) {
-    id
-    date
-    totalAmount
-    client {
-      name
+  completedOrders: orders(status: COMPLETED, first: 5) {
+    totalCount
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    edges {
+      cursor
+      node {
+        id
+        date
+        totalAmount
+        client {
+          name
+        }
+      }
     }
   }
 }

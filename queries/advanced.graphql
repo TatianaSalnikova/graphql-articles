@@ -81,12 +81,16 @@ query GetOrderData($orderId: ID!) {
     }
   }
   
-  recentOrders: orders(limit: 5) {
-    ...OrderSummary
-    client {
-      name # Only name for list
+  recentOrders: orders(first: 5) {
+  edges {
+    node {
+      ...OrderSummary
+      client {
+        name
+      }
     }
   }
+}
 }
 
 # Conditional query with directives
