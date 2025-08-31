@@ -101,14 +101,3 @@ query GetClient($withAddress: Boolean!) {
     address @include(if: $withAddress)
   }
 }
-
-# Subscription example
-subscription OrderUpdates($orderId: ID!) {
-  orderStatusChanged(orderId: $orderId) {
-    orderId
-    oldStatus
-    newStatus
-    updatedAt
-  }
-}
-
