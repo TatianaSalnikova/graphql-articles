@@ -11,6 +11,10 @@ Live examples and schemas for GraphQL article series.
 
 - [Basic GraphQL server with examples from articles](https://c2x5lh-3000.csb.app/)
 
+## Coming Next
+- [ ] GraphQL Subscriptions with WebSockets
+- [ ] Real-time order status updates
+
 
 ## 📋 Schema & Query Files
 
