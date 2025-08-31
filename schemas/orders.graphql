@@ -112,7 +112,6 @@ type Query {
   order(id: ID!): Order!
   orders(
     orderStatus: OrderStatus
-    limit: Int
     first: Int
     after: String
   ): OrderConnection!
