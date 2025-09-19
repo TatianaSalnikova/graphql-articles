@@ -74,6 +74,14 @@ type Order {
   totalAmount: String!
 }
 
+type OrderStatusUpdate {
+  orderId: ID!
+  oldStatus: OrderStatus!
+  newStatus: OrderStatus!
+  updatedAt: String!
+  order: Order!
+}
+
 # Input types
 input CreateOrderInput {
   clientId: ID!
@@ -84,6 +92,11 @@ input CreateOrderInput {
 input OrderItemInput {
   productId: ID!
   quantity: Int!
+}
+
+input UpdateOrderStatusInput {
+  orderId: ID!
+  newStatus: OrderStatus!
 }
 
 # Connection types for pagination
@@ -119,4 +132,10 @@ type Query {
 
 type Mutation {
   createOrder(input: CreateOrderInput!): Order!
+  updateOrderStatus(input: UpdateOrderStatusInput!): OrderStatusUpdate!
+}
+
+type Subscription {
+  orderStatusChanged(orderId: ID): OrderStatusUpdate!
+  newOrderCreated: Order!
 }

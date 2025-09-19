@@ -101,3 +101,33 @@ query GetClient($withAddress: Boolean!) {
     address @include(if: $withAddress)
   }
 }
+# Subscriptions
+subscription {
+  orderStatusChanged {
+    orderId
+    oldStatus
+    newStatus
+    updatedAt
+    order {
+      id
+      totalAmount
+      client {
+        name
+      }
+    }
+  }
+}
+
+mutation {
+  updateOrderStatus(input: {
+    orderId: "ORD-001"
+    newStatus: PROCESSING
+  }) {
+    orderId
+    oldStatus
+    newStatus
+    order {
+      status
+    }
+  }
+}
